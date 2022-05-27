@@ -28,18 +28,19 @@ y = [5, 6, 7, 6, 9, 8, 7, 10, 12, 12]
 # y = [940, 790, 910, 1020, 540, 340, 810, 720, 830]
 
 
-r = sum_fun(stats.zscore(x)*stats.zscore(y), 9)  # r_values using z_scores
-r = r/9
-print("r = ", r)
-div_std = np.std(y)/np.std(x)      # std being divided to multiply with r_value and obtain slope
-slope = r*div_std
+correlation_coefficient = sum_fun(stats.zscore(x)*stats.zscore(y), 9)  # correlation coefficient  using z_scores
+correlation_coefficient /= 9
+print("r = ", correlation_coefficient)
+div_std = np.std(y)/np.std(x)      # std being divided to multiply with correlation coefficient and obtain slope
+slope = correlation_coefficient*div_std
 
 intercept = np.mean(y) - slope*np.mean(x)
 
 true_value_error_finder(x, y, slope, intercept)
 
-
+x = np.array(x)
+y = np.array(y)
 plt.plot(x, y, 'o')
-slide_slope, intercept_slide = np.polyfit(x, y, 1)
-plt.plot(x, slide_slope*x + intercept_slide)
+slope, intercept = np.polyfit(x, y, 1)
+plt.plot(x, slope*x + intercept)
 plt.show()
