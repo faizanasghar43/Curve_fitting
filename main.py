@@ -17,7 +17,8 @@ def true_value_error_finder(x_, y_, m, c):
     err = np.zeros(len(y_))
     for i in range(len(x_)):
         true_values_[i] = c + m * x_[i]
-        err[i] = true_values_[i] - y[i]
+        err[i] = (true_values_[i] - y[i])/true_values_[i]
+        err[i] *= 100
     print("True VALUES func = ", true_values_, "\n ERROR FROM FUNCTION = ", err)
     print("\n\n\nError = ", np.mean(true_values_) - np.mean(err))
 
